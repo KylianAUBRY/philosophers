@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:15:05 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/15 16:39:51 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:57:59 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ void	ft_adieux(t_philo *philo, t_info *info)
 	t_philo	*temp;
 
 	temp = philo;
-	sem_close(info->message);
-	sem_close(info->stop);
-	sem_close(info->forks);
-	free(info);
 	while (temp != NULL)
 	{
 		kill(philo->pid, SIGKILL);
@@ -80,6 +76,10 @@ void	ft_adieux(t_philo *philo, t_info *info)
 		free(temp);
 		temp = philo;
 	}
+	sem_close(info->message);
+	sem_close(info->stop);
+	sem_close(info->forks);
+	free(info);
 	exit (0);
 }
 

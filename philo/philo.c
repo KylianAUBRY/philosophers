@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:06:18 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/15 16:41:29 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:18:37 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	*thread_routine(void *temp)
 		gettimeofday(&philo->time_last_eat, NULL);
 		usleep(philo->inf->time_eat * 1000);
 		philo->nb_eat++;
-		gettimeofday(&philo->time_last_eat, NULL);
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->fork_right);
 		ft_print(philo, "is sleeping\n");
