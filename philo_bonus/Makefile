@@ -1,14 +1,14 @@
-NAME	=	philo
+NAME	=	philo_bonus
 
-SRCS	=	main.c	\
-			utils.c \
-			philo.c \
-		
+SRCS	=	main_bonus.c	\
+			utils_bonus.c \
+			philo_bonus.c \
+
 OBJ =	${SRCS:.c=.o}
 
 CC =	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread #-D_REENTRANT -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -pthread #-fsanitize=address
 
 .c.o:
 			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
