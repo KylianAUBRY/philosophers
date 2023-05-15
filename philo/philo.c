@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:06:18 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/13 21:12:12 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:41:29 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,23 @@ void	*thread_routine(void *temp)
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->fork_right);
 		ft_print(philo, "is sleeping\n");
-		usleep(philo->inf->time_sleep);
+		usleep(philo->inf->time_sleep * 1000);
 		ft_print(philo, "is thinking\n");
 	}
 	return (NULL);
 }
 
-int	start_pthread(t_philo **philo)
+int	start_pthread(t_philo **philo, t_info *info)
 {
-	t_philo	*temp;
+	t_philo			*temp;
+	struct timeval	start_time;
 
+	gettimeofday(&start_time, NULL);
 	temp = *philo;
-	pthread_mutex_init(&temp->inf->print, NULL);
+	pthread_mutex_init(&info->print, NULL);
 	while (temp != NULL)
 	{
+		temp->start_time = start_time;
 		pthread_create(&temp->tid, NULL, thread_routine, (void *)temp);
 		usleep(10);
 		temp->nb_eat = 0;
@@ -80,23 +83,22 @@ int	start_pthread(t_philo **philo)
 	return (1);
 }
 
-void	ft_init_philo(t_info *info, t_philo **philo)
+int	ft_init_philo(t_info *info, t_philo **philo)
 {
-	t_philo			*temp;
-	t_philo			*temp2;
-	struct timeval	start_time;
-	int				i;
+	t_philo	*temp;
+	t_philo	*temp2;
+	int		i;
 
 	i = 0;
-	gettimeofday(&start_time, NULL);
 	while (++i <= info->nb_philo)
 	{
 		temp = malloc(sizeof(t_philo) * 1);
+		if (!temp)
+			return (ft_adieux(*philo, info));
 		temp->id = i;
 		temp->time_to_die = info->time_die;
-		temp->next = *philo;
-		temp->start_time = start_time;
 		temp->inf = info;
+		temp->next = *philo;
 		pthread_mutex_init(&temp->fork, NULL);
 		if (i > 1)
 			temp->fork_right = &(*philo)->fork;
@@ -106,5 +108,5 @@ void	ft_init_philo(t_info *info, t_philo **philo)
 	}
 	if (i > 1)
 		temp2->fork_right = &(*philo)->fork;
-	start_pthread(philo);
+	return (start_pthread(philo, info));
 }

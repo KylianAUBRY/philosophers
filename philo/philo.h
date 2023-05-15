@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 16:58:10 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/14 14:17:05 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:39:26 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int					ft_atoi(const char *nptr);
 int					ft_strlen(char *chaine);
 int					ft_uno(t_info *info);
 long				get_time(struct timeval start_time);
-void				ft_init_philo(t_info *info, t_philo **philo);
-int					start_pthread(t_philo **philo);
+int					ft_init_philo(t_info *info, t_philo **philo);
+int					start_pthread(t_philo **philo, t_info *info);
 void				*thread_routine(void *temp);
 long				get_time(struct timeval start_time);
 void				ft_print(t_philo *philo, char *chaine);

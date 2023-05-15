@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 20:03:33 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/14 20:05:21 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:10:22 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_routine(t_philo *philo)
 		sem_post(philo->inf->forks);
 		sem_post(philo->inf->forks);
 		ft_print(philo, "is sleeping\n");
-		usleep(philo->inf->time_sleep);
+		usleep(philo->inf->time_sleep * 1000);
 		ft_print(philo, "is thinking\n");
 	}
 }
@@ -69,6 +69,8 @@ void	ft_init_philo(t_info *info, t_philo **philo)
 	while (++i <= info->nb_philo)
 	{
 		temp = malloc(sizeof(t_philo) * 1);
+		if (!temp)
+			ft_adieux(*philo, info);
 		temp->id = i;
 		temp->time_to_die = info->time_die;
 		temp->next = *philo;

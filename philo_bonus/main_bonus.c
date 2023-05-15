@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:15:05 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/14 20:05:33 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:39:51 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ void	ft_adieux(t_philo *philo, t_info *info)
 	free(info);
 	while (temp != NULL)
 	{
+		kill(philo->pid, SIGKILL);
 		philo = philo->next;
 		free(temp);
 		temp = philo;
 	}
+	exit (0);
 }
 
 int	main(int argc, char **argv)
@@ -90,6 +92,8 @@ int	main(int argc, char **argv)
 	if (argc != 6 && argc != 5)
 		return (0);
 	info = malloc(sizeof(t_info) * 1);
+	if (!info)
+		return (0);
 	if (ft_init_arg(info, argc, argv) == 0)
 		return (0);
 	info->argc = argc;

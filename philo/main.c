@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:18:34 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/13 21:47:18 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:31:10 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ft_adieux(t_philo *philo, t_info *info)
 	t_philo	*temp;
 
 	temp = philo;
-	info->running = -1;
+	if (info)
+		info->running = -1;
 	while (temp != NULL)
 	{
 		pthread_join(temp->tid, NULL);
@@ -55,7 +56,8 @@ int	ft_adieux(t_philo *philo, t_info *info)
 		temp = philo;
 	}
 	pthread_mutex_destroy(&info->print);
-	free(info);
+	if (info)
+		free(info);
 	return (0);
 }
 
@@ -115,10 +117,13 @@ int	main(int argc, char **argv)
 	if (argc != 6 && argc != 5)
 		return (0);
 	info = malloc(sizeof(t_info) * 1);
+	if (!info)
+		return (0);
 	if (ft_init_arg(info, argc, argv) == 0)
 		return (0);
 	info->running = 1;
-	ft_init_philo(info, &philo);
+	if (ft_init_philo(info, &philo) == 0)
+		return (0);
 	usleep(200);
 	return (ft_verif(philo, info, argc));
 }
