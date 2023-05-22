@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:18:34 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/15 16:31:10 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:52:13 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	ft_verif(t_philo *philo, t_info *info, int argc)
 		{
 			info->running = -1;
 			pthread_mutex_lock(&temp->inf->print);
-			printf("%ldms %d die\n", get_time(temp->start_time), philo->id);
+			printf("%ldms %d die\n", get_time(temp->start_time), temp->id);
 			info->running = -1;
 			pthread_mutex_unlock(&temp->inf->print);
 			ft_adieux(philo, info);
@@ -124,6 +124,6 @@ int	main(int argc, char **argv)
 	info->running = 1;
 	if (ft_init_philo(info, &philo) == 0)
 		return (0);
-	usleep(200);
+	usleep(400);
 	return (ft_verif(philo, info, argc));
 }

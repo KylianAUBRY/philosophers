@@ -6,7 +6,7 @@
 /*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:06:18 by kyaubry           #+#    #+#             */
-/*   Updated: 2023/05/15 18:18:37 by kyaubry          ###   ########.fr       */
+/*   Updated: 2023/05/19 15:03:42 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	*thread_routine(void *temp)
 
 	philo = (t_philo *)temp;
 	gettimeofday(&philo->time_last_eat, NULL);
-	if (philo->id % 2 == 0)
-		usleep(200);
 	while (philo->inf->running != -1)
 	{
 		pthread_mutex_lock(&philo->fork);
@@ -56,6 +54,7 @@ void	*thread_routine(void *temp)
 		philo->nb_eat++;
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->fork_right);
+		ft_print(philo, "lache les fourchette\n");
 		ft_print(philo, "is sleeping\n");
 		usleep(philo->inf->time_sleep * 1000);
 		ft_print(philo, "is thinking\n");
@@ -75,7 +74,7 @@ int	start_pthread(t_philo **philo, t_info *info)
 	{
 		temp->start_time = start_time;
 		pthread_create(&temp->tid, NULL, thread_routine, (void *)temp);
-		usleep(10);
+		usleep(1000);
 		temp->nb_eat = 0;
 		temp = temp->next;
 	}
