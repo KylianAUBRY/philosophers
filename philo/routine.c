@@ -62,7 +62,7 @@ int	ft_eat(t_philo *temp)
 	pthread_mutex_unlock(philo->fork_right);
 	pthread_mutex_unlock(&philo->fork);
 	if (philo->inf->nb_time_eat != -1
-		&& ++philo->nb_eat >= philo->inf->nb_time_eat)
+		&& ++philo->nb_eat > philo->inf->nb_time_eat)
 		return (ft_satiated(philo));
 	return (0);
 }
