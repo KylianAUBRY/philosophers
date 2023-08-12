@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kylian <kylian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:27:04 by kylian            #+#    #+#             */
-/*   Updated: 2023/08/08 22:00:55 by kylian           ###   ########.fr       */
+/*   Updated: 2023/08/12 11:59:39 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_verif_2(t_philo *philo)
 {
 	sem_wait(philo->inf->time);
 	if (philo->inf->nb_time_eat != -1
-		&& philo->nb_eat >= philo->inf->nb_time_eat)
+		&& philo->nb_eat > philo->inf->nb_time_eat)
 	{
 		sem_post(philo->inf->time);
 		sem_wait(philo->inf->print);

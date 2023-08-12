@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_arg_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kylian <kylian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyaubry <kyaubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:00:56 by kylian            #+#    #+#             */
-/*   Updated: 2023/08/08 22:01:17 by kylian           ###   ########.fr       */
+/*   Updated: 2023/08/12 11:59:00 by kyaubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,10 @@ int	ft_create_semaphores_2(t_info *info)
 
 int	ft_create_semaphores(t_info *info)
 {
-	if (sem_unlink("print") == -1)
-		return (print_error_message(ERRCODE_SEM));
-	if (sem_unlink("forks") == -1)
-		return (print_error_message(ERRCODE_SEM));
-	if (sem_unlink("stop") == -1)
-		return (print_error_message(ERRCODE_SEM));
-	if (sem_unlink("time") == -1)
-		return (print_error_message(ERRCODE_SEM));
+	sem_unlink("print");
+	sem_unlink("forks");
+	sem_unlink("stop");
+	sem_unlink("time");
 	info->print = sem_open("print", O_CREAT, 0600, 1);
 	if (info->print == SEM_FAILED)
 		return (print_error_message(ERRCODE_SEM));
