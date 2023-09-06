@@ -15,6 +15,7 @@
 
 /* ==================== error ==================== */
 
+# define ERRCODE_ERR 0
 # define ERRCODE_MALLOC 1
 # define ERRMSG_MALLOC "ERROR :\nMalloc failed to allocate memory.\n"
 # define ERRCODE_MANY_ARG 2
