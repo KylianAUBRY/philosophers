@@ -79,7 +79,7 @@ int	ft_init_philo(t_info **info, t_philo **philo)
 		temp->inf = *info;
 		temp->next = *philo;
 		if (pthread_mutex_init(&temp->fork, NULL) != 0)
-			return (ft_adieux_philo_mutex(*philo, *info));
+			return (ft_adieux_philo_mutex(temp, *info));
 		if (i > 1)
 			temp->fork_right = &(*philo)->fork;
 		else
