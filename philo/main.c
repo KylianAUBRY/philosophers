@@ -23,6 +23,7 @@ int	ft_adieux(t_philo *philo, t_info *info)
 		pthread_mutex_destroy(&temp->time);
 		temp = temp->next;
 	}
+	temp = philo;
 	while (temp != NULL)
 	{
 		pthread_mutex_destroy(&philo->fork);
