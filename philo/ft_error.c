@@ -20,6 +20,7 @@ int	ft_error_get_time(t_philo *philo)
 	philo->time_last_eat.tv_usec += 9999;
 	philo->inf->running = -1;
 	pthread_mutex_unlock(&philo->inf->run);
+	pthread_mutex_unlock(&philo->time);
 	return (0);
 }
 
